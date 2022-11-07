@@ -89,7 +89,7 @@ void setup() {
   Serial.println("Serial OK");
 		URTCLIB_WIRE.begin();  
   // Only used once, then disabled
-  //rtc.set(0, 45, 6, 3, 1, 11, 22);
+  //rtc.set(0, 27, 11, 5, 5, 11, 22);
   //  RTCLib::set(byte second, byte minute, byte hour, byte dayOfWeek, byte dayOfMonth, byte month, byte year)
 
   rtc.set_rtc_address(0x68);
@@ -191,6 +191,11 @@ void loop() {
   temp();
   keys();
   Clock();
+char minute[] = "45";
+if (strcmp(rtc.minute(),minute) == 45){digitalWrite(LED_BUILTIN,0x1);
+}
+delay(1000);
+
 }
 void keys() {
    int microValue = analogRead(A14);
