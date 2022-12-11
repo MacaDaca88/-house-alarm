@@ -63,6 +63,7 @@ char Master[Password_length] = "1";
 
 int currentMillis = millis();
 unsigned long previousMillis;
+const long intervaltime = 21000;
 const long interval = 20000;
 const long ledtimer = 500;
 const long ledtimer2 = 100;
@@ -177,7 +178,7 @@ void loop() {
   float voltage2 = Battery1 * (5.0 / 1023.0);
   float voltage = Battery2 * (5.0 / 1023.0);
  
-  delay(1000);
+  delay(100);
 
   lcd2.setCursor(0, 0);
   lcd2.print("A1 = ");
@@ -194,7 +195,7 @@ void loop() {
 char minute[] = "45";
 if (strcmp(rtc.minute(),minute) == 45){digitalWrite(LED_BUILTIN,0x1);
 }
-delay(1000);
+delay(100);
 
 }
 void keys() {
@@ -396,7 +397,7 @@ lcd.print("Light: ");
           break;
         case 0xFF5AA5:
           Serial.println("6");
-          LDR();
+          xmas();
           break;
         case 0xFF42BD:
           Serial.println("7");
@@ -694,6 +695,46 @@ void police() {
   }
 keys();
 }
+void xmas() {
+
+  for (int a = 0; a < 8; a++) {
+    strip.setPixelColor(a, strip.Color(255, 0, 0));  // set STRIP to red
+    strip.show();
+    delay(100);
+  }
+  for (int c = 0; c < 31; c++) {
+    strip3.setPixelColor(c, strip.Color(0, 255, 0));  // set STRIP to green
+    strip3.show();
+    delay(100);
+  }
+  for (int c = 0; c < 31; c++) {
+    strip3.setPixelColor(c, strip.Color(0, 0, 255));  // set STRIP to blue
+    strip3.show();
+    delay(100);
+  }
+  for (int a = 0; a < 8; a++) {
+    strip.setPixelColor(a, strip.Color(255, 0, 0));  // set STRIP to red
+    strip.show();
+    delay(100);
+  }
+
+  for (int a = 0; a < 8; a++) {
+    strip.setPixelColor(a, strip.Color(0, 0, 255));  // set STRIP to blue
+    strip.show();
+    delay(100);
+  }
+  for (int c = 0; c < 31; c++) {
+    strip3.setPixelColor(c, strip.Color(255, 0, 0));  // set STRIP to red
+    strip3.show();
+    delay(100);
+  }
+  for (int c = 0; c < 31; c++) {
+    strip3.setPixelColor(c, strip.Color(0, 255, 0));  // set STRIP to off
+    strip3.show();
+    delay(100);
+  }
+keys();
+}
 
 void Clock() {
 
@@ -715,7 +756,7 @@ void Clock() {
   lcd.print('/');
    lcd.print(rtc.year());
 
-  if (currentMillis - previousMillis <= interval) {
+  if (currentMillis - previousMillis >= intervaltime) {
     previousMillis = currentMillis;
     Serial.print("RTC DateTime: ");
 
