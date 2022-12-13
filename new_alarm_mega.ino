@@ -401,7 +401,7 @@ lcd.print("Light: ");
           break;
         case 0xFF42BD:
           Serial.println("7");
-
+led();
           break;
         case 0xFF4AB5:
           Serial.println("8");
@@ -717,7 +717,11 @@ void xmas() {
     strip.show();
     delay(100);
   }
-
+  for (int a = 0; a < 8; a++) {
+    strip.setPixelColor(a, strip.Color(0, 255, 0));  // set STRIP to green
+    strip.show();
+    delay(100);
+  }
   for (int a = 0; a < 8; a++) {
     strip.setPixelColor(a, strip.Color(0, 0, 255));  // set STRIP to blue
     strip.show();
@@ -729,7 +733,7 @@ void xmas() {
     delay(100);
   }
   for (int c = 0; c < 31; c++) {
-    strip3.setPixelColor(c, strip.Color(0, 255, 0));  // set STRIP to off
+    strip3.setPixelColor(c, strip.Color(0, 255, 0));  // set STRIP to green
     strip3.show();
     delay(100);
   }
